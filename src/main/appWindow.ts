@@ -20,7 +20,7 @@ export function createAppWindow(): BrowserWindow {
     show: false,
     autoHideMenuBar: true,
     icon: path.resolve('assets/images/appIcon.ico'),
-    webPreferences: {
+    webPreferences: {      
       nodeIntegration: false,
       contextIsolation: true,
       nodeIntegrationInWorker: false,
@@ -29,7 +29,7 @@ export function createAppWindow(): BrowserWindow {
       sandbox: false,
     },
   });
-
+  
   // Load the index.html of the app window.
   appWindow.loadURL(APP_WINDOW_WEBPACK_ENTRY);
 
