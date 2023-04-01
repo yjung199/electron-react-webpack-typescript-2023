@@ -38,12 +38,5 @@ export function createAppWindow(): BrowserWindow {
   // Show window when its ready to
   appWindow.on('ready-to-show', () => appWindow.show());
 
-  // Close all windows when main window is closed
-  app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
-      app.quit();
-    }
-  });
-  
   return appWindow;
 }
