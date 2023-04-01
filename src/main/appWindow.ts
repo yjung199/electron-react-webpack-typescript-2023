@@ -13,7 +13,7 @@ let appWindow: BrowserWindow;
  */
 export function createAppWindow(): BrowserWindow {
   // Create new window instance
-  appWindow = new BrowserWindow({
+  const appWindow = new BrowserWindow({
     width: 800,
     height: 600,
     backgroundColor: '#202020',
@@ -29,6 +29,8 @@ export function createAppWindow(): BrowserWindow {
       sandbox: false,
     },
   });
+
+  appWindow.webContents.openDevTools();
   
   // Load the index.html of the app window.
   appWindow.loadURL(APP_WINDOW_WEBPACK_ENTRY);
@@ -37,10 +39,11 @@ export function createAppWindow(): BrowserWindow {
   appWindow.on('ready-to-show', () => appWindow.show());
 
   // Close all windows when main window is closed
-  appWindow.on('close', () => {
-    appWindow = null;
-    app.quit();
+  app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") {
+      app.quit();
+    }
   });
-
+  
   return appWindow;
 }
